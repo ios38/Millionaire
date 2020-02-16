@@ -1,24 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main Menu Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainMenuController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgw-1D-rYC">
+                                <rect key="frame" x="127" y="202" width="127" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Начать игру">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HzA-zB-aoW"/>
+                                    <segue destination="mTa-3o-Ljt" kind="presentation" identifier="StartGame" modalPresentationStyle="fullScreen" id="oV2-jI-lQj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-Jx-rf4">
+                                <rect key="frame" x="128" y="271" width="119" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Результаты">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="resultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="01E-AP-1my"/>
+                                    <segue destination="rUH-Tw-dvV" kind="presentation" identifier="ShowResults" modalPresentationStyle="fullScreen" id="HgZ-Vt-eVz"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="139"/>
+        </scene>
+        <!--Results Controller-->
+        <scene sceneID="J4z-W5-DIc">
+            <objects>
+                <viewController id="rUH-Tw-dvV" customClass="ResultsController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9Fb-oG-JwT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gC-q5-ibo">
+                                <rect key="frame" x="153" y="313" width="69" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Назад">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="rUH-Tw-dvV" eventType="touchUpInside" id="aRD-uN-gS6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7gC-q5-ibo" firstAttribute="centerY" secondItem="9Fb-oG-JwT" secondAttribute="centerY" id="62O-K6-2z0"/>
+                            <constraint firstItem="7gC-q5-ibo" firstAttribute="centerX" secondItem="9Fb-oG-JwT" secondAttribute="centerX" id="Ex5-QD-Twj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qma-XX-wOp"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvK-qI-qzA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="912"/>
+        </scene>
+        <!--Game Controller-->
+        <scene sceneID="qkU-mM-qMZ">
+            <objects>
+                <viewController id="mTa-3o-Ljt" customClass="GameController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HPC-Sh-be4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-sT-QmL">
+                                <rect key="frame" x="20" y="20" width="335" height="72"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-cG-hUG">
+                                <rect key="frame" x="30" y="100" width="315" height="467"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="mTa-3o-Ljt" id="Znr-1P-xA1"/>
+                                    <outlet property="delegate" destination="mTa-3o-Ljt" id="iDi-Ei-kWg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Btn-cG-hUG" secondAttribute="trailing" constant="30" id="0o5-NR-QVb"/>
+                            <constraint firstItem="RUk-sT-QmL" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="20" id="3yX-Hh-KwR"/>
+                            <constraint firstItem="Btn-cG-hUG" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="8QM-gA-4TZ"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="RUk-sT-QmL" secondAttribute="trailing" constant="20" id="UNq-4G-ez4"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="bottom" secondItem="Btn-cG-hUG" secondAttribute="bottom" constant="100" id="X37-AG-gVL"/>
+                            <constraint firstItem="Btn-cG-hUG" firstAttribute="top" secondItem="RUk-sT-QmL" secondAttribute="bottom" constant="50" id="fJ3-1R-Ij5"/>
+                            <constraint firstItem="RUk-sT-QmL" firstAttribute="top" secondItem="ttU-VS-Wc9" secondAttribute="top" constant="50" id="u6V-Sl-CkQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ttU-VS-Wc9"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O2c-Fy-vjJ"/>
+                    <connections>
+                        <outlet property="questionLabel" destination="RUk-sT-QmL" id="3so-43-Sz7"/>
+                        <outlet property="questionTable" destination="Btn-cG-hUG" id="nHF-EQ-a7x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R9v-wQ-Rn3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896.79999999999995" y="138.98050974512745"/>
         </scene>
     </scenes>
 </document>
