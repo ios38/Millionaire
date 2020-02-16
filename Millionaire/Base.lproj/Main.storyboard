@@ -15,21 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgw-1D-rYC">
-                                <rect key="frame" x="127" y="202" width="127" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgw-1D-rYC">
+                                <rect key="frame" x="20" y="200" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Начать игру">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="startButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HzA-zB-aoW"/>
-                                    <segue destination="mTa-3o-Ljt" kind="presentation" identifier="StartGame" modalPresentationStyle="fullScreen" id="oV2-jI-lQj"/>
+                                    <segue destination="mTa-3o-Ljt" kind="presentation" identifier="StartGame" modalPresentationStyle="fullScreen" id="A1g-vG-a1q"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-Jx-rf4">
-                                <rect key="frame" x="128" y="271" width="119" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-Jx-rf4">
+                                <rect key="frame" x="20" y="290" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Результаты">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -39,10 +36,36 @@
                                     <segue destination="rUH-Tw-dvV" kind="presentation" identifier="ShowResults" modalPresentationStyle="fullScreen" id="HgZ-Vt-eVz"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-e7-rgS">
+                                <rect key="frame" x="20" y="380" width="335" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Itg-s4-t3A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="85x-7z-xgK"/>
+                            <constraint firstItem="lnu-Jx-rf4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Erb-Ra-56q"/>
+                            <constraint firstItem="hgw-1D-rYC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="OvU-MZ-leS"/>
+                            <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="VrY-fe-Z12"/>
+                            <constraint firstItem="hgw-1D-rYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aNn-hS-azy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lnu-Jx-rf4" secondAttribute="trailing" constant="20" id="aO7-OC-VyS"/>
+                            <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="cxG-sQ-bkF"/>
+                            <constraint firstItem="2nC-e7-rgS" firstAttribute="top" secondItem="lnu-Jx-rf4" secondAttribute="bottom" constant="50" id="jzS-g9-fFs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hgw-1D-rYC" secondAttribute="trailing" constant="20" id="kEP-uv-TtP"/>
+                            <constraint firstItem="lnu-Jx-rf4" firstAttribute="top" secondItem="hgw-1D-rYC" secondAttribute="bottom" constant="50" id="od3-bL-61O"/>
+                            <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="rDh-Yn-cYH"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="lastResultLabel" destination="2nC-e7-rgS" id="I7c-pz-16U"/>
+                        <outlet property="startButton" destination="hgw-1D-rYC" id="1py-6F-huI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

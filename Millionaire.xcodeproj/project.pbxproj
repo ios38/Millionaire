@@ -75,19 +75,19 @@
 		50F8E09D23F6AF140065763A /* Millionaire */ = {
 			isa = PBXGroup;
 			children = (
+				50F8E0A423F6AF140065763A /* Main.storyboard */,
 				50F8E09E23F6AF140065763A /* AppDelegate.swift */,
 				50F8E0A023F6AF140065763A /* SceneDelegate.swift */,
-				50F8E0A423F6AF140065763A /* Main.storyboard */,
-				50F8E0B823F6D27E0065763A /* GameController.swift */,
-				50F8E0A723F6AF150065763A /* Assets.xcassets */,
-				50F8E0A923F6AF150065763A /* LaunchScreen.storyboard */,
 				50F8E0AC23F6AF150065763A /* Info.plist */,
-				50F8E0B423F6B03F0065763A /* NetworkService.swift */,
+				50F8E0A923F6AF150065763A /* LaunchScreen.storyboard */,
+				50F8E0A723F6AF150065763A /* Assets.xcassets */,
 				50F8E0B223F6B01C0065763A /* Models.swift */,
 				50F8E0BA23F6DBA60065763A /* AnswerCell.swift */,
 				50F8E0BB23F6DBA60065763A /* AnswerCell.xib */,
 				50F8E0BE23F81BFF0065763A /* ResultsController.swift */,
+				50F8E0B823F6D27E0065763A /* GameController.swift */,
 				50F8E0B623F6B05A0065763A /* MainMenuController.swift */,
+				50F8E0B423F6B03F0065763A /* NetworkService.swift */,
 			);
 			path = Millionaire;
 			sourceTree = "<group>";

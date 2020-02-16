@@ -7,8 +7,15 @@
 //
 
 import UIKit
+protocol GameDelegate: class {
+    func didEndGame(withResult result: Bool)
+}
 
 class GameController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+//    func didEndGame(withResult result: Bool) {
+//    }
+    
+    weak var gameDelegate: GameDelegate?
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     
@@ -56,9 +63,12 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.allowsSelection = false
         let cell = tableView.cellForRow(at: indexPath) as! AnswerCell
+        var result: Bool
         if cell.answerLabel.text == trueAnswer {
+            result = true
             cell.answerView.layer.backgroundColor = trueAnswerColor.cgColor
         } else {
+            result = false
             cell.answerView.layer.backgroundColor = falseAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 guard let row = self.rowWithTrueAnswer() else { return }
@@ -67,7 +77,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        self.gameDelegate?.didEndGame(withResult: result)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.dismiss(animated: false, completion: nil)
         }
     }
