@@ -7,15 +7,15 @@
 //
 
 import UIKit
+/*
 protocol GameDelegate: class {
     func didEndGame(withResult result: Bool)
-}
+}*/
 
 class GameController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//    func didEndGame(withResult result: Bool) {
-//    }
     
-    weak var gameDelegate: GameDelegate?
+    //weak var gameDelegate: GameDelegate?
+    var onGameEnd: ((Bool)->Void)?
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     
@@ -77,8 +77,9 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
             }
         }
-        self.gameDelegate?.didEndGame(withResult: result)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        //self.gameDelegate?.didEndGame(withResult: result)
+        self.onGameEnd?(result)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.dismiss(animated: false, completion: nil)
         }
     }
