@@ -33,14 +33,8 @@ class MainMenuController: UIViewController {
             guard let destination = segue.destination as? GameController else { return }
             //destination.gameDelegate = self
             destination.onGameEnd = { [weak self] result in
-                var resultText = ""
-                switch result {
-                case true:
-                    resultText = "Вы угадали!"
-                default:
-                    resultText = "Вы не угадали!"
-                }
-                self?.lastResultLabel.text = resultText
+                let resultText = String(result)
+                self?.lastResultLabel.text = "Правильных ответов: \(resultText)"
             }
         default:
             break
