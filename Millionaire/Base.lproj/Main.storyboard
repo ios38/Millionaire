@@ -110,35 +110,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-sT-QmL">
-                                <rect key="frame" x="20" y="20" width="335" height="72"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Сложность" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zw9-jN-s6b">
+                                <rect key="frame" x="30" y="47" width="315" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-cG-hUG">
-                                <rect key="frame" x="30" y="100" width="315" height="467"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-cG-hUG">
+                                <rect key="frame" x="30" y="230" width="315" height="350"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="mTa-3o-Ljt" id="Znr-1P-xA1"/>
                                     <outlet property="delegate" destination="mTa-3o-Ljt" id="iDi-Ei-kWg"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RUk-sT-QmL">
+                                <rect key="frame" x="30" y="110" width="315" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Btn-cG-hUG" secondAttribute="trailing" constant="30" id="0o5-NR-QVb"/>
-                            <constraint firstItem="RUk-sT-QmL" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="20" id="3yX-Hh-KwR"/>
-                            <constraint firstItem="Btn-cG-hUG" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="8QM-gA-4TZ"/>
-                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="RUk-sT-QmL" secondAttribute="trailing" constant="20" id="UNq-4G-ez4"/>
-                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="bottom" secondItem="Btn-cG-hUG" secondAttribute="bottom" constant="100" id="X37-AG-gVL"/>
-                            <constraint firstItem="Btn-cG-hUG" firstAttribute="top" secondItem="RUk-sT-QmL" secondAttribute="bottom" constant="50" id="fJ3-1R-Ij5"/>
-                            <constraint firstItem="RUk-sT-QmL" firstAttribute="top" secondItem="ttU-VS-Wc9" secondAttribute="top" constant="50" id="u6V-Sl-CkQ"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ttU-VS-Wc9"/>
                     </view>
                     <navigationItem key="navigationItem" id="O2c-Fy-vjJ"/>
                     <connections>
+                        <outlet property="questionDifficulty" destination="zw9-jN-s6b" id="49X-Y6-VrE"/>
                         <outlet property="questionLabel" destination="RUk-sT-QmL" id="3so-43-Sz7"/>
                         <outlet property="questionTable" destination="Btn-cG-hUG" id="nHF-EQ-a7x"/>
                     </connections>

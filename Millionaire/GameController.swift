@@ -16,6 +16,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //weak var gameDelegate: GameDelegate?
     var onGameEnd: ((Int)->Void)?
+    @IBOutlet weak var questionDifficulty: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     
@@ -35,13 +36,15 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadquestionAndAnswers() {
-        NetworkService.loadQuestion(qType: questionType()) { result in
+        questionsType = getQuestionType()
+        NetworkService.loadQuestion(qType: questionsType) { result in
             switch result {
             case let .success(data):
                 self.questionAndAnswers = data
                 self.trueAnswer = data.answers[0]
                 self.questionAndAnswers.answers.shuffle()
                 DispatchQueue.main.async {
+                    self.questionDifficulty.text = "Уровень сложности: \(self.questionsType)"
                     self.questionLabel.text = data.question
                     self.questionTable.reloadData()
                 }
@@ -105,13 +108,13 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return nil
     }
     
-    func questionType() -> Int {
+    func getQuestionType() -> Int {
         switch self.trueAnswersCount {
-        case 0...3:
+        case 0...2:
             return 1
-        case 4...6:
+        case 3...5:
             return 2
-        case 7...:
+        case 6...:
             return 3
         default:
             return 1
