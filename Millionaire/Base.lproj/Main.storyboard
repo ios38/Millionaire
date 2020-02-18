@@ -87,11 +87,11 @@
                                 <rect key="frame" x="50" y="113" width="275" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" id="Huc-Aa-vbe">
-                                        <rect key="frame" x="0.0" y="28" width="275" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" rowHeight="30" id="Huc-Aa-vbe">
+                                        <rect key="frame" x="0.0" y="28" width="275" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Huc-Aa-vbe" id="b6G-ix-bQR">
-                                            <rect key="frame" x="0.0" y="0.0" width="275" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -128,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvK-qI-qzA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="911.69415292353835"/>
+            <point key="canvasLocation" x="138" y="839"/>
         </scene>
         <!--Game Controller-->
         <scene sceneID="qkU-mM-qMZ">
@@ -168,11 +168,11 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ed-0Y-Baq">
-                                <rect key="frame" x="30" y="634" width="315" height="50"/>
+                                <rect key="frame" x="120" y="634" width="135" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="CMe-qH-OBS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="50/50">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -189,9 +189,9 @@
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Btn-cG-hUG" secondAttribute="trailing" constant="30" id="7cw-sG-faK"/>
                             <constraint firstItem="Btn-cG-hUG" firstAttribute="top" secondItem="RUk-sT-QmL" secondAttribute="bottom" constant="20" id="AQg-VX-q5E"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="bottom" secondItem="Mel-Z4-cwh" secondAttribute="bottom" constant="30" id="HC2-XV-liT"/>
-                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="5Ed-0Y-Baq" secondAttribute="trailing" constant="30" id="MiS-TW-7qf"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="5Ed-0Y-Baq" secondAttribute="trailing" constant="120" id="MiS-TW-7qf"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="zw9-jN-s6b" secondAttribute="trailing" constant="30" id="Plw-hn-Tuu"/>
-                            <constraint firstItem="5Ed-0Y-Baq" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="VBo-EJ-su7"/>
+                            <constraint firstItem="5Ed-0Y-Baq" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="120" id="VBo-EJ-su7"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Mel-Z4-cwh" secondAttribute="trailing" constant="30" id="aGn-iG-Neg"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="RUk-sT-QmL" secondAttribute="trailing" constant="30" id="aKP-Y2-45L"/>
                             <constraint firstItem="RUk-sT-QmL" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="hK1-QV-pjO"/>

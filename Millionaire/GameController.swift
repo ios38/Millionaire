@@ -35,6 +35,9 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         overrideUserInterfaceStyle = .dark
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
         fiftyFiftyButton.addTarget(self, action: #selector(fiftyFiftyAnswers), for: .touchUpInside)
+        fiftyFiftyButton.layer.borderWidth = 2
+        fiftyFiftyButton.layer.borderColor = UIColor.white.cgColor
+        fiftyFiftyButton.layer.cornerRadius = 10
         trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
         gameDelegate = Game.shared.gameSession
         loadQuestionAndAnswers()

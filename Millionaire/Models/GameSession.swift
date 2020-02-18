@@ -9,7 +9,7 @@
 import UIKit
 
 class GameSession {
-    var result = 0
+
 }
 
 extension GameSession: GameDelegate {
