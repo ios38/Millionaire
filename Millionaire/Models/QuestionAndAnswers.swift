@@ -1,5 +1,5 @@
 //
-//  Models.swift
+//  QuestionAndAnswers.swift
 //  Millionaire
 //
 //  Created by Maksim Romanov on 14.02.2020.

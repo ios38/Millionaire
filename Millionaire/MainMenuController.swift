@@ -31,6 +31,7 @@ class MainMenuController: UIViewController {
         switch segue.identifier {
         case "StartGame":
             guard let destination = segue.destination as? GameController else { return }
+            Game.shared.gameSession = GameSession()
             //destination.gameDelegate = self
             destination.onGameEnd = { [weak self] result in
                 let resultText = String(result)

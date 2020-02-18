@@ -7,14 +7,14 @@
 //
 
 import UIKit
-/*
+
 protocol GameDelegate: class {
-    func didEndGame(withResult result: Bool)
-}*/
+    func didEndGame(withResult result: Int)
+}
 
 class GameController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    //weak var gameDelegate: GameDelegate?
+    weak var gameDelegate: GameDelegate?
     var onGameEnd: ((Int)->Void)?
     @IBOutlet weak var questionDifficulty: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
@@ -32,6 +32,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
+        gameDelegate = Game.shared.gameSession
         loadquestionAndAnswers()
     }
     
@@ -90,13 +91,13 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let trueIndexPath = IndexPath(row: row, section: 0)
                 let trueCell = tableView.cellForRow(at: trueIndexPath) as! AnswerCell
                 trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
+                self.gameDelegate?.didEndGame(withResult: self.trueAnswersCount)
                 self.onGameEnd?(self.trueAnswersCount)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.dismiss(animated: false, completion: nil)
                 }
             }
         }
-        //self.gameDelegate?.didEndGame(withResult: result)
     }
     
     func rowWithTrueAnswer() -> Int? {
