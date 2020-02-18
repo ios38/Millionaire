@@ -13,13 +13,15 @@ import SwiftyJSON
 class NetworkService {
     static let session: Alamofire.Session = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 20
+        config.timeoutIntervalForRequest = 30
         let session = Alamofire.Session(configuration: config)
         return session
     }()
     
     static func loadQuestion(qType: Int, completion: ((Swift.Result<QuestionAndAnswers, Error>) -> Void)? = nil) {
         let baseUrl = "https://lip2.xyz/api/millionaire.php"
+        //let baseUrl = "https://engine.lifeis.porn/api/millionaire.php"
+        
         
         let params: Parameters = [
             "q": qType

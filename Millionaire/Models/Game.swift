@@ -20,14 +20,12 @@ class Game {
     
     private init() {
         results = resultsCaretaker.load()
-        print("Game: results loaded: \(results.count)")
     }
     
     func endGame(with result: Int) {
         let date = Date()
         let newResult = GameResult(date: date, result: result)
         results.append(newResult)
-        print("Game: results: \(results.count)")
         gameSession = nil
     }
 }

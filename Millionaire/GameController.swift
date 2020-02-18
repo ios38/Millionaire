@@ -19,6 +19,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var questionDifficulty: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
+    @IBOutlet weak var fiftyFiftyButton: UIButton!
     
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
@@ -32,6 +33,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
+        fiftyFiftyButton.addTarget(self, action: #selector(fiftyFiftyAnswers), for: .touchUpInside)
         gameDelegate = Game.shared.gameSession
         loadquestionAndAnswers()
     }
@@ -57,7 +59,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
             
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return questionAndAnswers.answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,4 +123,16 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 1
         }
     }
+    
+    @objc func fiftyFiftyAnswers(_ sender: Any) {
+        var falseAnswers = questionAndAnswers.answers.filter { $0 != trueAnswer }
+        questionAndAnswers.answers.removeAll(where: { $0 != trueAnswer })
+        falseAnswers.shuffle()
+        guard let randomAnswer = falseAnswers.first else { return }
+        questionAndAnswers.answers.append(randomAnswer)
+        questionAndAnswers.answers.shuffle()
+        self.fiftyFiftyButton.isHidden = true
+        questionTable.reloadData()
+    }
+
 }
