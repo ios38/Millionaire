@@ -11,15 +11,23 @@ import Foundation
 class Game {
     static let shared = Game()
     var gameSession: GameSession?
-    private(set) var gameResults: [GameResult] = []
+    private let resultsCaretaker = ResultsCaretaker()
+    private(set) var results: [GameResult] {
+        didSet {
+            resultsCaretaker.save(results: self.results)
+        }
+    }
     
-    private init() {}
+    private init() {
+        results = resultsCaretaker.load()
+        print("Game: results loaded: \(results.count)")
+    }
     
     func endGame(with result: Int) {
         let date = Date()
         let newResult = GameResult(date: date, result: result)
-        gameResults.append(newResult)
-        print("Game: gameResults: \(gameResults)")
+        results.append(newResult)
+        print("Game: results: \(results.count)")
         gameSession = nil
     }
 }
