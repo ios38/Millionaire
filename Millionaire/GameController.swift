@@ -13,32 +13,34 @@ protocol GameDelegate: class {
 }
 
 class GameController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     weak var gameDelegate: GameDelegate?
-    var onGameEnd: ((Int)->Void)?
+    //var onGameEnd: ((Int)->Void)?
+    
     @IBOutlet weak var questionDifficulty: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     @IBOutlet weak var fiftyFiftyButton: UIButton!
+    @IBOutlet weak var trueAnswersCountLabel: UILabel!
     
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
+    var trueAnswersCount = 0
+    var questionsType = 1
     var trueAnswerColor  = UIColor(red: 0/255, green: 100/255, blue: 0/255, alpha: 1.0)
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
-    var trueAnswersCount = 0
-    var questionsType = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
         fiftyFiftyButton.addTarget(self, action: #selector(fiftyFiftyAnswers), for: .touchUpInside)
+        trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
         gameDelegate = Game.shared.gameSession
-        loadquestionAndAnswers()
+        loadQuestionAndAnswers()
     }
     
-    func loadquestionAndAnswers() {
+    func loadQuestionAndAnswers() {
         questionsType = getQuestionType()
         NetworkService.loadQuestion(qType: questionsType) { result in
             switch result {
@@ -78,11 +80,12 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //var result: Bool
         if cell.answerLabel.text == trueAnswer {
             trueAnswersCount += 1
+            trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
             //result = true
             cell.answerView.layer.backgroundColor = trueAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 cell.answerView.layer.backgroundColor = self.defaultColor.cgColor
-                self.loadquestionAndAnswers()
+                self.loadQuestionAndAnswers()
                 tableView.allowsSelection = true
             }
         } else {
@@ -94,7 +97,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let trueCell = tableView.cellForRow(at: trueIndexPath) as! AnswerCell
                 trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
                 self.gameDelegate?.didEndGame(withResult: self.trueAnswersCount)
-                self.onGameEnd?(self.trueAnswersCount)
+                //self.onGameEnd?(self.trueAnswersCount)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.dismiss(animated: false, completion: nil)
                 }
