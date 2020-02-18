@@ -11,11 +11,6 @@ import UIKit
 class MainMenuController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     
-    /*
-    @IBAction func startButton(_ sender: UIButton) {
-        performSegue(withIdentifier: "StartGame", sender: nil)
-    }*/
-    
     @IBAction func resultButton(_ sender: UIButton) {
     }
     

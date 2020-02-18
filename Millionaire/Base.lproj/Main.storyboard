@@ -80,7 +80,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gC-q5-ibo">
-                                <rect key="frame" x="153" y="313" width="69" height="41"/>
+                                <rect key="frame" x="153" y="596" width="69" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Назад">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -89,18 +89,52 @@
                                     <action selector="backButton:" destination="rUH-Tw-dvV" eventType="touchUpInside" id="aRD-uN-gS6"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5ZE-aF-hti">
+                                <rect key="frame" x="50" y="69" width="275" height="507"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" id="Huc-Aa-vbe">
+                                        <rect key="frame" x="0.0" y="28" width="275" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Huc-Aa-vbe" id="b6G-ix-bQR">
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rUH-Tw-dvV" id="FL8-RH-NJZ"/>
+                                    <outlet property="delegate" destination="rUH-Tw-dvV" id="EtS-Vb-wuK"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результаты" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxp-6d-3Tn">
+                                <rect key="frame" x="20" y="20" width="335" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="7gC-q5-ibo" firstAttribute="centerY" secondItem="9Fb-oG-JwT" secondAttribute="centerY" id="62O-K6-2z0"/>
-                            <constraint firstItem="7gC-q5-ibo" firstAttribute="centerX" secondItem="9Fb-oG-JwT" secondAttribute="centerX" id="Ex5-QD-Twj"/>
+                            <constraint firstItem="7gC-q5-ibo" firstAttribute="centerX" secondItem="9Fb-oG-JwT" secondAttribute="centerX" id="TYI-w2-UDi"/>
+                            <constraint firstItem="pxp-6d-3Tn" firstAttribute="top" secondItem="qma-XX-wOp" secondAttribute="top" constant="20" id="UVe-X8-GQJ"/>
+                            <constraint firstItem="5ZE-aF-hti" firstAttribute="top" secondItem="pxp-6d-3Tn" secondAttribute="bottom" constant="20" id="XDe-cb-I8Y"/>
+                            <constraint firstItem="qma-XX-wOp" firstAttribute="bottom" secondItem="7gC-q5-ibo" secondAttribute="bottom" constant="30" id="Xyl-ib-hL3"/>
+                            <constraint firstItem="pxp-6d-3Tn" firstAttribute="leading" secondItem="qma-XX-wOp" secondAttribute="leading" constant="20" id="XzJ-Lt-GbO"/>
+                            <constraint firstItem="5ZE-aF-hti" firstAttribute="leading" secondItem="qma-XX-wOp" secondAttribute="leading" constant="50" id="b5O-eI-1r6"/>
+                            <constraint firstItem="qma-XX-wOp" firstAttribute="trailing" secondItem="pxp-6d-3Tn" secondAttribute="trailing" constant="20" id="f6i-Td-QDY"/>
+                            <constraint firstItem="7gC-q5-ibo" firstAttribute="top" secondItem="5ZE-aF-hti" secondAttribute="bottom" constant="20" id="nNV-0B-ZzX"/>
+                            <constraint firstItem="qma-XX-wOp" firstAttribute="trailing" secondItem="5ZE-aF-hti" secondAttribute="trailing" constant="50" id="qUk-aL-O3P"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qma-XX-wOp"/>
                     </view>
+                    <connections>
+                        <outlet property="resultsTable" destination="5ZE-aF-hti" id="OZq-gy-Jg4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvK-qI-qzA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138" y="912"/>
+            <point key="canvasLocation" x="136.80000000000001" y="911.69415292353835"/>
         </scene>
         <!--Game Controller-->
         <scene sceneID="qkU-mM-qMZ">
