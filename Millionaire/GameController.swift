@@ -129,7 +129,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return 1
         }
     }
-    
+    /*
     @objc func fiftyFiftyAnswers(_ sender: Any) {
         var falseAnswers = questionAndAnswers.answers.filter { $0 != trueAnswer }
         questionAndAnswers.answers.removeAll(where: { $0 != trueAnswer })
@@ -139,6 +139,15 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         questionAndAnswers.answers.shuffle()
         self.fiftyFiftyButton.isHidden = true
         questionTable.reloadData()
+    }*/
+
+    @objc func fiftyFiftyAnswers(_ sender: Any) {
+    let falseAnswers = questionAndAnswers.answers.filter { $0 != trueAnswer }
+    questionAndAnswers.answers.removeAll(where: { $0 != trueAnswer })
+    guard let randomAnswer = falseAnswers.randomElement() else { return }
+    questionAndAnswers.answers.append(randomAnswer)
+    self.fiftyFiftyButton.isHidden = true
+    questionTable.reloadData()
     }
 
 }
