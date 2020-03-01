@@ -9,10 +9,26 @@
 import UIKit
 
 class MainMenuController: UIViewController {
+    @IBOutlet weak var difficultyControl: UISegmentedControl!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var resultsButton: UIButton!
     @IBOutlet weak var lastResultLabel: UILabel!
-    
+
+    private var selectedDifficulty: Difficulty {
+        switch self.difficultyControl.selectedSegmentIndex {
+        case 0:
+            return .easy
+        case 1:
+            return .medium
+        case 2:
+            return .hard
+        case 3:
+            return .insane
+        default:
+            return .medium
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark

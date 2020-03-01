@@ -22,6 +22,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var fiftyFiftyButton: UIButton!
     @IBOutlet weak var trueAnswersCountLabel: UILabel!
     
+    var difficulty: Difficulty = .medium
+    
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
     var trueAnswersCount = 0

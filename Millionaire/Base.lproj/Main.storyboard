@@ -16,21 +16,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgw-1D-rYC">
-                                <rect key="frame" x="20" y="244" width="335" height="40"/>
+                                <rect key="frame" x="20" y="205" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Новая игра">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-Jx-rf4">
-                                <rect key="frame" x="20" y="334" width="335" height="40"/>
+                                <rect key="frame" x="20" y="295" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Результаты">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-e7-rgS">
-                                <rect key="frame" x="20" y="424" width="335" height="50"/>
+                                <rect key="frame" x="20" y="385" width="335" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Itg-s4-t3A"/>
                                 </constraints>
@@ -38,24 +38,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mMi-qt-NjE">
+                                <rect key="frame" x="30" y="74" width="315" height="32"/>
+                                <segments>
+                                    <segment title="Easy"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Hard"/>
+                                    <segment title="Insane"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="85x-7z-xgK"/>
+                            <constraint firstItem="mMi-qt-NjE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="CFL-6n-zZW"/>
                             <constraint firstItem="lnu-Jx-rf4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Erb-Ra-56q"/>
-                            <constraint firstItem="hgw-1D-rYC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="OvU-MZ-leS"/>
+                            <constraint firstItem="mMi-qt-NjE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Gxp-ir-63r"/>
                             <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="VrY-fe-Z12"/>
                             <constraint firstItem="hgw-1D-rYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aNn-hS-azy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lnu-Jx-rf4" secondAttribute="trailing" constant="20" id="aO7-OC-VyS"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="cxG-sQ-bkF"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="top" secondItem="lnu-Jx-rf4" secondAttribute="bottom" constant="50" id="jzS-g9-fFs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hgw-1D-rYC" secondAttribute="trailing" constant="20" id="kEP-uv-TtP"/>
+                            <constraint firstItem="hgw-1D-rYC" firstAttribute="top" secondItem="mMi-qt-NjE" secondAttribute="bottom" constant="100" id="nfb-Qy-uNQ"/>
                             <constraint firstItem="lnu-Jx-rf4" firstAttribute="top" secondItem="hgw-1D-rYC" secondAttribute="bottom" constant="50" id="od3-bL-61O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mMi-qt-NjE" secondAttribute="trailing" constant="30" id="qRF-dd-ypx"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="rDh-Yn-cYH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="difficultyControl" destination="mMi-qt-NjE" id="Gps-64-trj"/>
                         <outlet property="lastResultLabel" destination="2nC-e7-rgS" id="I7c-pz-16U"/>
                         <outlet property="resultsButton" destination="lnu-Jx-rf4" id="c9q-z0-poZ"/>
                         <outlet property="startButton" destination="hgw-1D-rYC" id="1py-6F-huI"/>
