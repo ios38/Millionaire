@@ -33,8 +33,9 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
 
-    let questionStrategy = QuestionStrategy()
-    let timeStrategy = TimeStrategy()
+    //let questionStrategy = QuestionStrategy()
+    //let timeStrategy = TimeStrategy()
+    let gameDifficultyFacade = GameDifficultyFacade()
     var currentCountdown = 0
     var countdownTimer = Timer()
     //let timerDispatchGroup = DispatchGroup() // Init DispatchGroup
@@ -54,7 +55,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadQuestionAndAnswers() {
-        questionsType = questionStrategy.getQuestionDifficulty()
+        //questionsType = questionStrategy.getQuestionDifficulty()
+        questionsType = gameDifficultyFacade.getQuestionDifficulty()
         NetworkService.loadQuestion(qType: questionsType) { result in
             switch result {
             case let .success(data):
@@ -109,21 +111,24 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
             countdownTimer.invalidate()
             cell.answerView.layer.backgroundColor = falseAnswerColor.cgColor
             gameCompletion()
-            /*
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                guard let row = self.rowWithTrueAnswer() else { return }
-                let trueIndexPath = IndexPath(row: row, section: 0)
-                let trueCell = tableView.cellForRow(at: trueIndexPath) as! AnswerCell
-                trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
-                self.gameDelegate?.didEndGame()
-                //self.onGameEnd?(self.trueAnswersCount)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.dismiss(animated: false, completion: nil)
-                }
-            }*/
         }
     }
-    
+
+    func gameCompletion() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.countdownLabel.text = "Игра окончена!"
+            guard let row = self.rowWithTrueAnswer() else { return }
+            let trueIndexPath = IndexPath(row: row, section: 0)
+            let trueCell = self.questionTable.cellForRow(at: trueIndexPath) as! AnswerCell
+            trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
+            self.gameDelegate?.didEndGame()
+            //self.onGameEnd?(self.trueAnswersCount)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
+
     func rowWithTrueAnswer() -> Int? {
         for i in 0...3 {
             if questionAndAnswers.answers[i] == trueAnswer {
@@ -143,7 +148,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func startTimer() {
-            currentCountdown = timeStrategy.getCountdownDuration()
+            //currentCountdown = timeStrategy.getCountdownDuration()
+            currentCountdown = gameDifficultyFacade.getCountdownDuration()
             //timerDispatchGroup.enter() // Enter DispatchGroup
             countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleCountdown), userInfo: nil, repeats: true)
     }
@@ -155,21 +161,6 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
             countdownTimer.invalidate()
             gameCompletion()
             //timerDispatchGroup.leave() // Leave DispatchGroup
-        }
-    }
-    
-    func gameCompletion() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.countdownLabel.text = "Игра окончена!"
-            guard let row = self.rowWithTrueAnswer() else { return }
-            let trueIndexPath = IndexPath(row: row, section: 0)
-            let trueCell = self.questionTable.cellForRow(at: trueIndexPath) as! AnswerCell
-            trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
-            self.gameDelegate?.didEndGame()
-            //self.onGameEnd?(self.trueAnswersCount)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.dismiss(animated: false, completion: nil)
-            }
         }
     }
 }
