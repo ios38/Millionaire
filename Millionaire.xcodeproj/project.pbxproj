@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		503EA9C6240C9EBE00C8CEAE /* TimeStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA9C5240C9EBE00C8CEAE /* TimeStrategy.swift */; };
+		503EA9C8240CC12100C8CEAE /* QuestionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA9C7240CC12100C8CEAE /* QuestionStrategy.swift */; };
 		5086B500240BD757005966B4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5086B4FF240BD757005966B4 /* Difficulty.swift */; };
 		50BBDE0023FB7FB200B8A540 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BBDDFF23FB7FB200B8A540 /* Game.swift */; };
 		50BBDE0223FB805500B8A540 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BBDE0123FB805500B8A540 /* GameSession.swift */; };
@@ -31,6 +32,7 @@
 /* Begin PBXFileReference section */
 		1CDC7237E9B56CA4D143E626 /* Pods-Millionaire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Millionaire.debug.xcconfig"; path = "Target Support Files/Pods-Millionaire/Pods-Millionaire.debug.xcconfig"; sourceTree = "<group>"; };
 		503EA9C5240C9EBE00C8CEAE /* TimeStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStrategy.swift; sourceTree = "<group>"; };
+		503EA9C7240CC12100C8CEAE /* QuestionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStrategy.swift; sourceTree = "<group>"; };
 		5086B4FF240BD757005966B4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		50BBDDFF23FB7FB200B8A540 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		50BBDE0123FB805500B8A540 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				5086B4FF240BD757005966B4 /* Difficulty.swift */,
+				503EA9C7240CC12100C8CEAE /* QuestionStrategy.swift */,
 				503EA9C5240C9EBE00C8CEAE /* TimeStrategy.swift */,
 			);
 			path = Strategy;
@@ -268,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50F8E0BF23F81BFF0065763A /* ResultsController.swift in Sources */,
+				503EA9C8240CC12100C8CEAE /* QuestionStrategy.swift in Sources */,
 				50BBDE0023FB7FB200B8A540 /* Game.swift in Sources */,
 				50BBDE0223FB805500B8A540 /* GameSession.swift in Sources */,
 				50F8E0B523F6B03F0065763A /* NetworkService.swift in Sources */,

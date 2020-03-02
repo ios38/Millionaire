@@ -9,7 +9,9 @@
 import UIKit
 
 class GameSession {
-
+    var difficulty: Difficulty = .medium
+    var trueAnswersCount = 0
+    
 }
 
 extension GameSession: GameDelegate {
@@ -21,9 +23,12 @@ extension GameSession: GameDelegate {
         mainMenu.present(gameController, animated: false)
 
     }*/
+    func trueAnswer() {
+        trueAnswersCount += 1
+    }
     
-    func didEndGame(withResult result: Int) {
-        print("GameSession: правильных ответов: \(result)")
-        Game.shared.endGame(with: result)
+    func didEndGame() {
+        print("GameSession: правильных ответов: \(trueAnswersCount)")
+        Game.shared.endGame(with: trueAnswersCount)
     }
 }

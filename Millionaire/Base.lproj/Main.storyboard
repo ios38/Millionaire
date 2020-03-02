@@ -219,7 +219,7 @@
                     </view>
                     <connections>
                         <outlet property="fiftyFiftyButton" destination="5Ed-0Y-Baq" id="00p-Dv-SeH"/>
-                        <outlet property="questionDifficulty" destination="zw9-jN-s6b" id="49X-Y6-VrE"/>
+                        <outlet property="questionDifficultyLabel" destination="zw9-jN-s6b" id="49X-Y6-VrE"/>
                         <outlet property="questionLabel" destination="RUk-sT-QmL" id="3so-43-Sz7"/>
                         <outlet property="questionTable" destination="Btn-cG-hUG" id="nHF-EQ-a7x"/>
                         <outlet property="trueAnswersCountLabel" destination="Mel-Z4-cwh" id="zOY-QJ-h5O"/>
