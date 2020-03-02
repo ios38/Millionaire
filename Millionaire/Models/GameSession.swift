@@ -13,14 +13,14 @@ class GameSession {
 }
 
 extension GameSession: GameDelegate {
-    
+    /*
     func startGame(_ mainMenu: UIViewController) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let gameController = storyboard.instantiateViewController(withIdentifier: "GameController") as! GameController
         gameController.modalPresentationStyle = .overFullScreen
         mainMenu.present(gameController, animated: false)
 
-    }
+    }*/
     
     func didEndGame(withResult result: Int) {
         print("GameSession: правильных ответов: \(result)")

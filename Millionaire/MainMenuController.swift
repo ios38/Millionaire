@@ -38,7 +38,13 @@ class MainMenuController: UIViewController {
 
     @objc func startSession(_ sender: Any) {
         Game.shared.gameSession = GameSession()
-        Game.shared.gameSession?.startGame(self)
+        //Game.shared.gameSession?.startGame(self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let gameController = storyboard.instantiateViewController(withIdentifier: "GameController") as! GameController
+        gameController.modalPresentationStyle = .overFullScreen
+        gameController.difficulty = self.selectedDifficulty
+        present(gameController, animated: false)
+
     }
 
     @objc func showResults(_ sender: Any) {

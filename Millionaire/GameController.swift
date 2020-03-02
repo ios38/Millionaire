@@ -21,9 +21,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var questionTable: UITableView!
     @IBOutlet weak var fiftyFiftyButton: UIButton!
     @IBOutlet weak var trueAnswersCountLabel: UILabel!
-    
-    var difficulty: Difficulty = .medium
-    
+        
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
     var trueAnswersCount = 0
@@ -31,6 +29,13 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var trueAnswerColor  = UIColor(red: 0/255, green: 100/255, blue: 0/255, alpha: 1.0)
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
+
+    var countdownSeconds = 10
+    var currentCountdownSeconds = 0
+    var countdownTimer = Timer()
+    let timerDispatchGroup = DispatchGroup() // Init DispatchGroup
+
+    var difficulty: Difficulty = .medium
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +62,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.questionDifficulty.text = "Уровень сложности: \(self.questionsType)"
                     self.questionLabel.text = data.question
                     self.questionTable.reloadData()
+                    self.startTimer(countdownSeconds: self.countdownSeconds)
                 }
 
             case let .failure(error):
@@ -84,6 +90,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRow(at: indexPath) as! AnswerCell
         //var result: Bool
         if cell.answerLabel.text == trueAnswer {
+            countdownTimer.invalidate()
             trueAnswersCount += 1
             trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
             //result = true
@@ -95,6 +102,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         } else {
             //result = false
+            countdownTimer.invalidate()
             cell.answerView.layer.backgroundColor = falseAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 guard let row = self.rowWithTrueAnswer() else { return }
@@ -152,4 +160,22 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     questionTable.reloadData()
     }
 
+    func startTimer(countdownSeconds: Int) {
+        if countdownSeconds != 0 {
+            currentCountdownSeconds = countdownSeconds
+            //timerDispatchGroup.enter() // Enter DispatchGroup
+            countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleCountdown), userInfo: nil, repeats: true)
+        }
+    }
+
+    @objc func handleCountdown() {
+        //previewView.countdownLabel.text = "\(currentCountdownSeconds)"
+        currentCountdownSeconds -= 1
+        print(currentCountdownSeconds)
+        if currentCountdownSeconds == 0 {
+            countdownTimer.invalidate()
+            //print("Время закончилось!")
+            //timerDispatchGroup.leave() // Leave DispatchGroup
+        }
+    }
 }
