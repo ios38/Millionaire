@@ -119,7 +119,6 @@
 		50F8E09D23F6AF140065763A /* Millionaire */ = {
 			isa = PBXGroup;
 			children = (
-				5086B4FD240BD706005966B4 /* Patterns */,
 				50F8E0A423F6AF140065763A /* Main.storyboard */,
 				50F8E09E23F6AF140065763A /* AppDelegate.swift */,
 				50F8E0A023F6AF140065763A /* SceneDelegate.swift */,
@@ -132,6 +131,7 @@
 				50F8E0B823F6D27E0065763A /* GameController.swift */,
 				50F8E0B623F6B05A0065763A /* MainMenuController.swift */,
 				50F8E0B423F6B03F0065763A /* NetworkService.swift */,
+				5086B4FD240BD706005966B4 /* Patterns */,
 				50BBDE0523FB872B00B8A540 /* Models */,
 			);
 			path = Millionaire;

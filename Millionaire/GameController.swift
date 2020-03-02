@@ -19,6 +19,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //var onGameEnd: ((Int)->Void)?
     
     @IBOutlet weak var questionDifficultyLabel: UILabel!
+    @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     @IBOutlet weak var fiftyFiftyButton: UIButton!
@@ -32,16 +33,16 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
 
-    var countdownSeconds = 10
-    var currentCountdownSeconds = 0
-    var countdownTimer = Timer()
-    let timerDispatchGroup = DispatchGroup() // Init DispatchGroup
-    
     let questionStrategy = QuestionStrategy()
-        
+    let timeStrategy = TimeStrategy()
+    var currentCountdown = 0
+    var countdownTimer = Timer()
+    //let timerDispatchGroup = DispatchGroup() // Init DispatchGroup
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
+        countdownLabel.text = ""
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
         fiftyFiftyButton.addTarget(self, action: #selector(fiftyFiftyAnswers), for: .touchUpInside)
         fiftyFiftyButton.layer.borderWidth = 2
@@ -63,8 +64,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 DispatchQueue.main.async {
                     self.questionDifficultyLabel.text = "Уровень сложности: \(self.questionsType)"
                     self.questionLabel.text = data.question
+                    self.startTimer()
                     self.questionTable.reloadData()
-                    self.startTimer(countdownSeconds: self.countdownSeconds)
                 }
 
             case let .failure(error):
@@ -141,27 +142,25 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     questionTable.reloadData()
     }
 
-    func startTimer(countdownSeconds: Int) {
-        if countdownSeconds != 0 {
-            currentCountdownSeconds = countdownSeconds
+    func startTimer() {
+            currentCountdown = timeStrategy.getCountdownDuration()
             //timerDispatchGroup.enter() // Enter DispatchGroup
             countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleCountdown), userInfo: nil, repeats: true)
-        }
     }
 
     @objc func handleCountdown() {
-        //previewView.countdownLabel.text = "\(currentCountdownSeconds)"
-        currentCountdownSeconds -= 1
-        print(currentCountdownSeconds)
-        if currentCountdownSeconds == 0 {
+        countdownLabel.text = "\(currentCountdown)"
+        currentCountdown -= 1
+        if currentCountdown == -1 {
             countdownTimer.invalidate()
-            //print("Время закончилось!")
+            gameCompletion()
             //timerDispatchGroup.leave() // Leave DispatchGroup
         }
     }
     
     func gameCompletion() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.countdownLabel.text = "Игра окончена!"
             guard let row = self.rowWithTrueAnswer() else { return }
             let trueIndexPath = IndexPath(row: row, section: 0)
             let trueCell = self.questionTable.cellForRow(at: trueIndexPath) as! AnswerCell
