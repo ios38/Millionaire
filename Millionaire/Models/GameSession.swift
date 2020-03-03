@@ -10,8 +10,7 @@ import UIKit
 
 class GameSession {
     var difficulty: Difficulty = .medium
-    var trueAnswersCount = 0
-    
+    var trueAnswersCount = Observable<Int>(0)
 }
 
 extension GameSession: GameDelegate {
@@ -24,11 +23,11 @@ extension GameSession: GameDelegate {
 
     }*/
     func trueAnswer() {
-        trueAnswersCount += 1
+        trueAnswersCount.value += 1
     }
     
     func didEndGame() {
         print("GameSession: правильных ответов: \(trueAnswersCount)")
-        Game.shared.endGame(with: trueAnswersCount)
+        Game.shared.endGame(with: trueAnswersCount.value)
     }
 }

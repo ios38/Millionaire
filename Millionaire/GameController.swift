@@ -49,8 +49,11 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         fiftyFiftyButton.layer.borderWidth = 2
         fiftyFiftyButton.layer.borderColor = UIColor.white.cgColor
         fiftyFiftyButton.layer.cornerRadius = 10
-        trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
+        //trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
         gameDelegate = Game.shared.gameSession
+        Game.shared.gameSession?.trueAnswersCount.addObserver(self, options: [.new, .initial], closure: { [weak self] (trueAnswersCount, _) in
+            self?.trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
+        })
         loadQuestionAndAnswers()
     }
     
@@ -97,8 +100,8 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if cell.answerLabel.text == trueAnswer {
             countdownTimer.invalidate()
             self.gameDelegate?.trueAnswer()
-            trueAnswersCount += 1
-            trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
+            //trueAnswersCount += 1
+            //trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
             //result = true
             cell.answerView.layer.backgroundColor = trueAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

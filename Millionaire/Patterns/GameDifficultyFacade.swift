@@ -48,7 +48,7 @@ class GameDifficultyFacade {
     
     func mediumDifficulty() -> Int {
         guard let trueAnswersCount = Game.shared.gameSession?.trueAnswersCount else { return 1 }
-        switch trueAnswersCount {
+        switch trueAnswersCount.value {
         case 0...4:
             return 1
         case 5...9:
@@ -62,7 +62,7 @@ class GameDifficultyFacade {
 
     func hardDifficulty() -> Int {
         guard let trueAnswersCount = Game.shared.gameSession?.trueAnswersCount else { return 1 }
-        switch trueAnswersCount {
+        switch trueAnswersCount.value {
         case 0...4:
             return 2
         case 5...9:

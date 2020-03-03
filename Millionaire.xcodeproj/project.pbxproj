@@ -10,6 +10,7 @@
 		503EA9C6240C9EBE00C8CEAE /* TimeStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA9C5240C9EBE00C8CEAE /* TimeStrategy.swift */; };
 		503EA9C8240CC12100C8CEAE /* QuestionStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA9C7240CC12100C8CEAE /* QuestionStrategy.swift */; };
 		503EA9CA240D5A5400C8CEAE /* GameDifficultyFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503EA9C9240D5A5400C8CEAE /* GameDifficultyFacade.swift */; };
+		50419962240DF889000801A8 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50419961240DF889000801A8 /* Observable.swift */; };
 		5086B500240BD757005966B4 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5086B4FF240BD757005966B4 /* Difficulty.swift */; };
 		50BBDE0023FB7FB200B8A540 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BBDDFF23FB7FB200B8A540 /* Game.swift */; };
 		50BBDE0223FB805500B8A540 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BBDE0123FB805500B8A540 /* GameSession.swift */; };
@@ -35,6 +36,7 @@
 		503EA9C5240C9EBE00C8CEAE /* TimeStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeStrategy.swift; sourceTree = "<group>"; };
 		503EA9C7240CC12100C8CEAE /* QuestionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionStrategy.swift; sourceTree = "<group>"; };
 		503EA9C9240D5A5400C8CEAE /* GameDifficultyFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDifficultyFacade.swift; sourceTree = "<group>"; };
+		50419961240DF889000801A8 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		5086B4FF240BD757005966B4 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		50BBDDFF23FB7FB200B8A540 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		50BBDE0123FB805500B8A540 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				5086B4FE240BD727005966B4 /* Strategy */,
 				50BBDE0623FB8C9500B8A540 /* ResultsCaretaker.swift */,
 				503EA9C9240D5A5400C8CEAE /* GameDifficultyFacade.swift */,
+				50419961240DF889000801A8 /* Observable.swift */,
 			);
 			path = Patterns;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				50F8E0A123F6AF140065763A /* SceneDelegate.swift in Sources */,
 				50F8E0BC23F6DBA60065763A /* AnswerCell.swift in Sources */,
 				50F8E0B323F6B01C0065763A /* QuestionAndAnswers.swift in Sources */,
+				50419962240DF889000801A8 /* Observable.swift in Sources */,
 				50BBDE0723FB8C9500B8A540 /* ResultsCaretaker.swift in Sources */,
 				50F8E0B723F6B05A0065763A /* MainMenuController.swift in Sources */,
 				50BBDE0423FB84E000B8A540 /* GameResult.swift in Sources */,
