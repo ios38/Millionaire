@@ -16,28 +16,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgw-1D-rYC">
-                                <rect key="frame" x="20" y="244" width="335" height="40"/>
+                                <rect key="frame" x="20" y="205" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <state key="normal" title="Начать игру">
+                                <state key="normal" title="Новая игра">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
-                                <connections>
-                                    <segue destination="mTa-3o-Ljt" kind="presentation" identifier="StartGame" modalPresentationStyle="fullScreen" id="A1g-vG-a1q"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lnu-Jx-rf4">
-                                <rect key="frame" x="20" y="334" width="335" height="40"/>
+                                <rect key="frame" x="20" y="295" width="335" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Результаты">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
-                                <connections>
-                                    <action selector="resultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="01E-AP-1my"/>
-                                    <segue destination="rUH-Tw-dvV" kind="presentation" identifier="ShowResults" modalPresentationStyle="fullScreen" id="HgZ-Vt-eVz"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2nC-e7-rgS">
-                                <rect key="frame" x="20" y="424" width="335" height="50"/>
+                                <rect key="frame" x="20" y="385" width="335" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Itg-s4-t3A"/>
                                 </constraints>
@@ -45,25 +38,39 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mMi-qt-NjE">
+                                <rect key="frame" x="30" y="74" width="315" height="32"/>
+                                <segments>
+                                    <segment title="Easy"/>
+                                    <segment title="Medium"/>
+                                    <segment title="Hard"/>
+                                    <segment title="Insane"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="85x-7z-xgK"/>
+                            <constraint firstItem="mMi-qt-NjE" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="30" id="CFL-6n-zZW"/>
                             <constraint firstItem="lnu-Jx-rf4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Erb-Ra-56q"/>
-                            <constraint firstItem="hgw-1D-rYC" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="OvU-MZ-leS"/>
+                            <constraint firstItem="mMi-qt-NjE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Gxp-ir-63r"/>
                             <constraint firstAttribute="trailing" secondItem="2nC-e7-rgS" secondAttribute="trailing" constant="20" id="VrY-fe-Z12"/>
                             <constraint firstItem="hgw-1D-rYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aNn-hS-azy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lnu-Jx-rf4" secondAttribute="trailing" constant="20" id="aO7-OC-VyS"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="cxG-sQ-bkF"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="top" secondItem="lnu-Jx-rf4" secondAttribute="bottom" constant="50" id="jzS-g9-fFs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hgw-1D-rYC" secondAttribute="trailing" constant="20" id="kEP-uv-TtP"/>
+                            <constraint firstItem="hgw-1D-rYC" firstAttribute="top" secondItem="mMi-qt-NjE" secondAttribute="bottom" constant="100" id="nfb-Qy-uNQ"/>
                             <constraint firstItem="lnu-Jx-rf4" firstAttribute="top" secondItem="hgw-1D-rYC" secondAttribute="bottom" constant="50" id="od3-bL-61O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mMi-qt-NjE" secondAttribute="trailing" constant="30" id="qRF-dd-ypx"/>
                             <constraint firstItem="2nC-e7-rgS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="rDh-Yn-cYH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="difficultyControl" destination="mMi-qt-NjE" id="Gps-64-trj"/>
                         <outlet property="lastResultLabel" destination="2nC-e7-rgS" id="I7c-pz-16U"/>
+                        <outlet property="resultsButton" destination="lnu-Jx-rf4" id="c9q-z0-poZ"/>
                         <outlet property="startButton" destination="hgw-1D-rYC" id="1py-6F-huI"/>
                     </connections>
                 </viewController>
@@ -74,7 +81,7 @@
         <!--Results Controller-->
         <scene sceneID="J4z-W5-DIc">
             <objects>
-                <viewController id="rUH-Tw-dvV" customClass="ResultsController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultsController" id="rUH-Tw-dvV" customClass="ResultsController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Fb-oG-JwT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,11 +100,11 @@
                                 <rect key="frame" x="50" y="113" width="275" height="574"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" id="Huc-Aa-vbe">
-                                        <rect key="frame" x="0.0" y="28" width="275" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ResultCell" rowHeight="30" id="Huc-Aa-vbe">
+                                        <rect key="frame" x="0.0" y="28" width="275" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Huc-Aa-vbe" id="b6G-ix-bQR">
-                                            <rect key="frame" x="0.0" y="0.0" width="275" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="275" height="30"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -134,27 +141,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvK-qI-qzA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="911.69415292353835"/>
+            <point key="canvasLocation" x="138" y="839"/>
         </scene>
         <!--Game Controller-->
         <scene sceneID="qkU-mM-qMZ">
             <objects>
-                <viewController id="mTa-3o-Ljt" customClass="GameController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameController" id="mTa-3o-Ljt" customClass="GameController" customModule="Millionaire" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HPC-Sh-be4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сложность" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zw9-jN-s6b">
-                                <rect key="frame" x="30" y="74" width="315" height="50"/>
+                                <rect key="frame" x="30" y="94" width="315" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3Ik-tK-Txm"/>
+                                    <constraint firstAttribute="height" constant="30" id="3Ik-tK-Txm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUk-sT-QmL">
-                                <rect key="frame" x="30" y="144" width="315" height="100"/>
+                                <rect key="frame" x="30" y="134" width="315" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="QJd-kx-VD4"/>
                                 </constraints>
@@ -162,18 +169,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ed-0Y-Baq">
-                                <rect key="frame" x="30" y="644" width="315" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CMe-qH-OBS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="50/50">
-                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Btn-cG-hUG">
-                                <rect key="frame" x="30" y="264" width="315" height="350"/>
+                                <rect key="frame" x="30" y="244" width="315" height="350"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="350" id="6f6-gX-e0s"/>
@@ -183,34 +180,67 @@
                                     <outlet property="delegate" destination="mTa-3o-Ljt" id="iDi-Ei-kWg"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ed-0Y-Baq">
+                                <rect key="frame" x="120" y="624" width="135" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="CMe-qH-OBS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="50/50">
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mel-Z4-cwh">
+                                <rect key="frame" x="30" y="724" width="315" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Время" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wur-Az-GiV">
+                                <rect key="frame" x="30" y="54" width="315" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="NRf-L5-rgp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="zw9-jN-s6b" firstAttribute="top" secondItem="Wur-Az-GiV" secondAttribute="bottom" constant="10" id="1hC-od-2d0"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Btn-cG-hUG" secondAttribute="trailing" constant="30" id="7cw-sG-faK"/>
-                            <constraint firstItem="Btn-cG-hUG" firstAttribute="top" secondItem="RUk-sT-QmL" secondAttribute="bottom" constant="20" id="AQg-VX-q5E"/>
-                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="5Ed-0Y-Baq" secondAttribute="trailing" constant="30" id="MiS-TW-7qf"/>
+                            <constraint firstItem="Btn-cG-hUG" firstAttribute="top" secondItem="RUk-sT-QmL" secondAttribute="bottom" constant="10" id="AQg-VX-q5E"/>
+                            <constraint firstItem="Wur-Az-GiV" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="AhS-c2-q7r"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="bottom" secondItem="Mel-Z4-cwh" secondAttribute="bottom" constant="30" id="HC2-XV-liT"/>
+                            <constraint firstItem="Wur-Az-GiV" firstAttribute="top" secondItem="ttU-VS-Wc9" secondAttribute="top" constant="10" id="LnL-kX-UiZ"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="5Ed-0Y-Baq" secondAttribute="trailing" constant="120" id="MiS-TW-7qf"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="zw9-jN-s6b" secondAttribute="trailing" constant="30" id="Plw-hn-Tuu"/>
-                            <constraint firstItem="5Ed-0Y-Baq" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="VBo-EJ-su7"/>
+                            <constraint firstItem="RUk-sT-QmL" firstAttribute="top" secondItem="zw9-jN-s6b" secondAttribute="bottom" constant="10" id="U32-bJ-4O5"/>
+                            <constraint firstItem="5Ed-0Y-Baq" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="120" id="VBo-EJ-su7"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Mel-Z4-cwh" secondAttribute="trailing" constant="30" id="aGn-iG-Neg"/>
                             <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="RUk-sT-QmL" secondAttribute="trailing" constant="30" id="aKP-Y2-45L"/>
                             <constraint firstItem="RUk-sT-QmL" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="hK1-QV-pjO"/>
                             <constraint firstItem="5Ed-0Y-Baq" firstAttribute="top" secondItem="Btn-cG-hUG" secondAttribute="bottom" constant="30" id="k1e-gK-Ty7"/>
                             <constraint firstItem="Btn-cG-hUG" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="ki7-Tq-bzb"/>
-                            <constraint firstItem="zw9-jN-s6b" firstAttribute="top" secondItem="ttU-VS-Wc9" secondAttribute="top" constant="30" id="l2F-m5-otv"/>
+                            <constraint firstItem="Mel-Z4-cwh" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="mg8-iG-4JO"/>
                             <constraint firstItem="zw9-jN-s6b" firstAttribute="leading" secondItem="ttU-VS-Wc9" secondAttribute="leading" constant="30" id="miL-vW-i5h"/>
-                            <constraint firstItem="RUk-sT-QmL" firstAttribute="top" secondItem="zw9-jN-s6b" secondAttribute="bottom" constant="20" id="xNI-pF-a8d"/>
+                            <constraint firstItem="ttU-VS-Wc9" firstAttribute="trailing" secondItem="Wur-Az-GiV" secondAttribute="trailing" constant="30" id="od0-sh-DBu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ttU-VS-Wc9"/>
                     </view>
                     <connections>
+                        <outlet property="countdownLabel" destination="Wur-Az-GiV" id="pF3-ap-OAe"/>
                         <outlet property="fiftyFiftyButton" destination="5Ed-0Y-Baq" id="00p-Dv-SeH"/>
-                        <outlet property="questionDifficulty" destination="zw9-jN-s6b" id="49X-Y6-VrE"/>
+                        <outlet property="questionDifficultyLabel" destination="zw9-jN-s6b" id="49X-Y6-VrE"/>
                         <outlet property="questionLabel" destination="RUk-sT-QmL" id="3so-43-Sz7"/>
                         <outlet property="questionTable" destination="Btn-cG-hUG" id="nHF-EQ-a7x"/>
+                        <outlet property="trueAnswersCountLabel" destination="Mel-Z4-cwh" id="zOY-QJ-h5O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9v-wQ-Rn3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896.79999999999995" y="138.98050974512745"/>
+            <point key="canvasLocation" x="896.79999999999995" y="138.91625615763547"/>
         </scene>
     </scenes>
 </document>

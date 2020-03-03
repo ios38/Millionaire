@@ -6,15 +6,37 @@
 //  Copyright © 2020 Maksim Romanov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class GameSession {
-    var result = 0
+    var difficulty: Difficulty = .medium
+    var trueAnswersCount = Observable<Int>(0)
+    
+    let questionsCaretaker = QuestionsCaretaker()
+    private(set) var questions: [LocalQuestion] {
+        didSet {
+            questionsCaretaker.save(self.questions)
+            print("GameSession: locaLQuestions.count: \(self.questions.count)")
+        }
+    }
+    
+    init() {
+        questions = questionsCaretaker.load()
+    }
+
 }
 
 extension GameSession: GameDelegate {
-    func didEndGame(withResult result: Int) {
-        print("GameSession: правильных ответов: \(result)")
-        Game.shared.endGame(with: result)
+    func didLoadQuestion(_ question: LocalQuestion) {
+        questions.append(question)
+    }
+    
+    func trueAnswer() {
+        trueAnswersCount.value += 1
+    }
+    
+    func didEndGame() {
+        print("GameSession: правильных ответов: \(trueAnswersCount.value)")
+        Game.shared.endGame(with: trueAnswersCount.value)
     }
 }

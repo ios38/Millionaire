@@ -9,46 +9,82 @@
 import UIKit
 
 protocol GameDelegate: class {
-    func didEndGame(withResult result: Int)
+    func didLoadQuestion(_ question: LocalQuestion)
+    func trueAnswer()
+    func didEndGame()
 }
 
 class GameController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+        
     weak var gameDelegate: GameDelegate?
-    var onGameEnd: ((Int)->Void)?
-    @IBOutlet weak var questionDifficulty: UILabel!
+    //var onGameEnd: ((Int)->Void)?
+    
+    @IBOutlet weak var questionDifficultyLabel: UILabel!
+    @IBOutlet weak var countdownLabel: UILabel!
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionTable: UITableView!
     @IBOutlet weak var fiftyFiftyButton: UIButton!
-    
+    @IBOutlet weak var trueAnswersCountLabel: UILabel!
+        
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
+    var trueAnswersCount = 0
+    var questionType = 1
     var trueAnswerColor  = UIColor(red: 0/255, green: 100/255, blue: 0/255, alpha: 1.0)
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
-    var trueAnswersCount = 0
-    var questionsType = 1
 
+    //let questionStrategy = QuestionStrategy()
+    //let timeStrategy = TimeStrategy()
+    let gameDifficultyFacade = GameDifficultyFacade()
+    var currentCountdown = 0
+    var countdownTimer = Timer()
+    //let timerDispatchGroup = DispatchGroup()
+    let questionsCaretaker = QuestionsCaretaker()
+    let questionBuilder = QuestionBuilder()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
+        countdownLabel.text = ""
         questionTable.register(UINib(nibName: "AnswerCell", bundle: nil), forCellReuseIdentifier: "AnswerCell")
         fiftyFiftyButton.addTarget(self, action: #selector(fiftyFiftyAnswers), for: .touchUpInside)
+        fiftyFiftyButton.layer.borderWidth = 2
+        fiftyFiftyButton.layer.borderColor = UIColor.white.cgColor
+        fiftyFiftyButton.layer.cornerRadius = 10
+        //trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
         gameDelegate = Game.shared.gameSession
-        loadquestionAndAnswers()
+        Game.shared.gameSession?.trueAnswersCount.addObserver(self, options: [.new, .initial], closure: { [weak self] (trueAnswersCount, _) in
+            self?.trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
+        })
+        loadQuestionAndAnswers()
     }
     
-    func loadquestionAndAnswers() {
-        questionsType = getQuestionType()
-        NetworkService.loadQuestion(qType: questionsType) { result in
+    func loadQuestionAndAnswers() {
+        //questionsType = questionStrategy.getQuestionDifficulty()
+        questionType = gameDifficultyFacade.getQuestionDifficulty()
+        NetworkService.loadQuestion(qType: questionType) { result in
             switch result {
             case let .success(data):
                 self.questionAndAnswers = data
                 self.trueAnswer = data.answers[0]
+                /*
+                let localQuestion = LocalQuestion(
+                    type: self.questionType,
+                    question: data.question,
+                    answers: data.answers)
+                */
+                self.questionBuilder.setType(self.questionType)
+                self.questionBuilder.setQuestion(data.question)
+                self.questionBuilder.setAnswers(data.answers)
+                let localQuestion = self.questionBuilder.build()
+                self.gameDelegate?.didLoadQuestion(localQuestion)
+
                 self.questionAndAnswers.answers.shuffle()
                 DispatchQueue.main.async {
-                    self.questionDifficulty.text = "Уровень сложности: \(self.questionsType)"
+                    self.questionDifficultyLabel.text = "Уровень сложности: \(self.questionType)"
                     self.questionLabel.text = data.question
+                    self.startTimer()
                     self.questionTable.reloadData()
                 }
 
@@ -75,33 +111,37 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.allowsSelection = false
         let cell = tableView.cellForRow(at: indexPath) as! AnswerCell
-        //var result: Bool
         if cell.answerLabel.text == trueAnswer {
-            trueAnswersCount += 1
-            //result = true
+            countdownTimer.invalidate()
+            self.gameDelegate?.trueAnswer()
             cell.answerView.layer.backgroundColor = trueAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 cell.answerView.layer.backgroundColor = self.defaultColor.cgColor
-                self.loadquestionAndAnswers()
+                self.loadQuestionAndAnswers()
                 tableView.allowsSelection = true
             }
         } else {
-            //result = false
+            countdownTimer.invalidate()
             cell.answerView.layer.backgroundColor = falseAnswerColor.cgColor
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                guard let row = self.rowWithTrueAnswer() else { return }
-                let trueIndexPath = IndexPath(row: row, section: 0)
-                let trueCell = tableView.cellForRow(at: trueIndexPath) as! AnswerCell
-                trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
-                self.gameDelegate?.didEndGame(withResult: self.trueAnswersCount)
-                self.onGameEnd?(self.trueAnswersCount)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    self.dismiss(animated: false, completion: nil)
-                }
+            gameCompletion()
+        }
+    }
+
+    func gameCompletion() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.countdownLabel.text = "Игра окончена!"
+            guard let row = self.rowWithTrueAnswer() else { return }
+            let trueIndexPath = IndexPath(row: row, section: 0)
+            let trueCell = self.questionTable.cellForRow(at: trueIndexPath) as! AnswerCell
+            trueCell.answerView.layer.backgroundColor = self.trueAnswerColor.cgColor
+            self.gameDelegate?.didEndGame()
+            //self.onGameEnd?(self.trueAnswersCount)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.dismiss(animated: false, completion: nil)
             }
         }
     }
-    
+
     func rowWithTrueAnswer() -> Int? {
         for i in 0...3 {
             if questionAndAnswers.answers[i] == trueAnswer {
@@ -110,29 +150,30 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         return nil
     }
-    
-    func getQuestionType() -> Int {
-        switch self.trueAnswersCount {
-        case 0...2:
-            return 1
-        case 3...5:
-            return 2
-        case 6...:
-            return 3
-        default:
-            return 1
-        }
-    }
-    
+
     @objc func fiftyFiftyAnswers(_ sender: Any) {
-        var falseAnswers = questionAndAnswers.answers.filter { $0 != trueAnswer }
-        questionAndAnswers.answers.removeAll(where: { $0 != trueAnswer })
-        falseAnswers.shuffle()
-        guard let randomAnswer = falseAnswers.first else { return }
-        questionAndAnswers.answers.append(randomAnswer)
-        questionAndAnswers.answers.shuffle()
-        self.fiftyFiftyButton.isHidden = true
-        questionTable.reloadData()
+    let falseAnswers = questionAndAnswers.answers.filter { $0 != trueAnswer }
+    questionAndAnswers.answers.removeAll(where: { $0 != trueAnswer })
+    guard let randomAnswer = falseAnswers.randomElement() else { return }
+    questionAndAnswers.answers.append(randomAnswer)
+    self.fiftyFiftyButton.isHidden = true
+    questionTable.reloadData()
     }
 
+    func startTimer() {
+            //currentCountdown = timeStrategy.getCountdownDuration()
+            currentCountdown = gameDifficultyFacade.getCountdownDuration()
+            //timerDispatchGroup.enter()
+            countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleCountdown), userInfo: nil, repeats: true)
+    }
+
+    @objc func handleCountdown() {
+        countdownLabel.text = "\(currentCountdown)"
+        currentCountdown -= 1
+        if currentCountdown == -1 {
+            countdownTimer.invalidate()
+            gameCompletion()
+            //timerDispatchGroup.leave()
+        }
+    }
 }
