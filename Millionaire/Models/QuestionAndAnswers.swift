@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class QuestionAndAnswers {
+class QuestionAndAnswers: Encodable, Decodable {
     var question = ""
     var answers = [String]()
 
@@ -22,6 +22,5 @@ class QuestionAndAnswers {
         question = json["question"].stringValue
         let answersJSON = json["answers"].arrayValue
         answers = answersJSON.map { $0.stringValue }
-        //answers = jsonToString(answersJSON)
     }
 }

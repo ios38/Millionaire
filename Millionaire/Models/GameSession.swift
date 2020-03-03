@@ -11,23 +11,32 @@ import UIKit
 class GameSession {
     var difficulty: Difficulty = .medium
     var trueAnswersCount = Observable<Int>(0)
+    
+    let questionsCaretaker = QuestionsCaretaker()
+    private(set) var questions: [LocalQuestion] {
+        didSet {
+            questionsCaretaker.save(self.questions)
+            print("GameSession: locaLQuestions.count: \(self.questions.count)")
+        }
+    }
+    
+    init() {
+        questions = questionsCaretaker.load()
+    }
+
 }
 
 extension GameSession: GameDelegate {
-    /*
-    func startGame(_ mainMenu: UIViewController) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let gameController = storyboard.instantiateViewController(withIdentifier: "GameController") as! GameController
-        gameController.modalPresentationStyle = .overFullScreen
-        mainMenu.present(gameController, animated: false)
-
-    }*/
+    func didLoadQuestion(_ question: LocalQuestion) {
+        questions.append(question)
+    }
+    
     func trueAnswer() {
         trueAnswersCount.value += 1
     }
     
     func didEndGame() {
-        print("GameSession: правильных ответов: \(trueAnswersCount)")
+        print("GameSession: правильных ответов: \(trueAnswersCount.value)")
         Game.shared.endGame(with: trueAnswersCount.value)
     }
 }

@@ -9,6 +9,7 @@
 import UIKit
 
 protocol GameDelegate: class {
+    func didLoadQuestion(_ question: LocalQuestion)
     func trueAnswer()
     func didEndGame()
 }
@@ -28,7 +29,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var questionAndAnswers = QuestionAndAnswers("Загружаю вопрос...", ["","","",""])
     var trueAnswer = ""
     var trueAnswersCount = 0
-    var questionsType = 1
+    var questionType = 1
     var trueAnswerColor  = UIColor(red: 0/255, green: 100/255, blue: 0/255, alpha: 1.0)
     var falseAnswerColor  = UIColor(red: 100/255, green: 0/255, blue: 0/255, alpha: 1.0)
     var defaultColor  = UIColor.black
@@ -38,7 +39,9 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let gameDifficultyFacade = GameDifficultyFacade()
     var currentCountdown = 0
     var countdownTimer = Timer()
-    //let timerDispatchGroup = DispatchGroup() // Init DispatchGroup
+    //let timerDispatchGroup = DispatchGroup()
+    let questionsCaretaker = QuestionsCaretaker()
+    let questionBuilder = QuestionBuilder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,15 +62,27 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadQuestionAndAnswers() {
         //questionsType = questionStrategy.getQuestionDifficulty()
-        questionsType = gameDifficultyFacade.getQuestionDifficulty()
-        NetworkService.loadQuestion(qType: questionsType) { result in
+        questionType = gameDifficultyFacade.getQuestionDifficulty()
+        NetworkService.loadQuestion(qType: questionType) { result in
             switch result {
             case let .success(data):
                 self.questionAndAnswers = data
                 self.trueAnswer = data.answers[0]
+                /*
+                let localQuestion = LocalQuestion(
+                    type: self.questionType,
+                    question: data.question,
+                    answers: data.answers)
+                */
+                self.questionBuilder.setType(self.questionType)
+                self.questionBuilder.setQuestion(data.question)
+                self.questionBuilder.setAnswers(data.answers)
+                let localQuestion = self.questionBuilder.build()
+                self.gameDelegate?.didLoadQuestion(localQuestion)
+
                 self.questionAndAnswers.answers.shuffle()
                 DispatchQueue.main.async {
-                    self.questionDifficultyLabel.text = "Уровень сложности: \(self.questionsType)"
+                    self.questionDifficultyLabel.text = "Уровень сложности: \(self.questionType)"
                     self.questionLabel.text = data.question
                     self.startTimer()
                     self.questionTable.reloadData()
@@ -96,13 +111,9 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.allowsSelection = false
         let cell = tableView.cellForRow(at: indexPath) as! AnswerCell
-        //var result: Bool
         if cell.answerLabel.text == trueAnswer {
             countdownTimer.invalidate()
             self.gameDelegate?.trueAnswer()
-            //trueAnswersCount += 1
-            //trueAnswersCountLabel.text = "Правильных ответов: \(trueAnswersCount)"
-            //result = true
             cell.answerView.layer.backgroundColor = trueAnswerColor.cgColor
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 cell.answerView.layer.backgroundColor = self.defaultColor.cgColor
@@ -110,7 +121,6 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 tableView.allowsSelection = true
             }
         } else {
-            //result = false
             countdownTimer.invalidate()
             cell.answerView.layer.backgroundColor = falseAnswerColor.cgColor
             gameCompletion()
@@ -153,7 +163,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func startTimer() {
             //currentCountdown = timeStrategy.getCountdownDuration()
             currentCountdown = gameDifficultyFacade.getCountdownDuration()
-            //timerDispatchGroup.enter() // Enter DispatchGroup
+            //timerDispatchGroup.enter()
             countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(handleCountdown), userInfo: nil, repeats: true)
     }
 
@@ -163,7 +173,7 @@ class GameController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if currentCountdown == -1 {
             countdownTimer.invalidate()
             gameCompletion()
-            //timerDispatchGroup.leave() // Leave DispatchGroup
+            //timerDispatchGroup.leave()
         }
     }
 }

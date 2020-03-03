@@ -39,7 +39,6 @@ class MainMenuController: UIViewController {
     @objc func startSession(_ sender: Any) {
         Game.shared.gameSession = GameSession()
         Game.shared.gameSession?.difficulty = self.selectedDifficulty
-        //Game.shared.gameSession?.startGame(self)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let gameController = storyboard.instantiateViewController(withIdentifier: "GameController") as! GameController
         gameController.modalPresentationStyle = .overFullScreen
@@ -53,33 +52,4 @@ class MainMenuController: UIViewController {
         resultsController.modalPresentationStyle = .overFullScreen
         present(resultsController, animated: false)
     }
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "StartGame":
-            guard let destination = segue.destination as? GameController else { return }
-            Game.shared.gameSession = GameSession()
-            //destination.gameDelegate = self
-            destination.onGameEnd = { [weak self] result in
-                let resultText = String(result)
-                self?.lastResultLabel.text = "Правильных ответов: \(resultText)"
-            }
-        default:
-            break
-        }
-    }*/
 }
-/*
-extension MainMenuController: GameDelegate {
-    func didEndGame(withResult result: Bool) {
-        var resultText = ""
-        switch result {
-        case true:
-            resultText = "Вы угадали!"
-        default:
-            resultText = "Вы не угадали!"
-        }
-        lastResultLabel.text = resultText
-    }
-
-}*/
