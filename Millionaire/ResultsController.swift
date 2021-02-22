@@ -12,7 +12,6 @@ class ResultsController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet weak var resultsTable: UITableView!
     @IBAction func backButton(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
-
     }
 
     let dateFormatter = DateFormatter()
@@ -31,16 +30,11 @@ class ResultsController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = resultsTable.dequeueReusableCell(withIdentifier: "ResultCell", for: indexPath)
-        if indexPath.row == 0 {
-            cell.textLabel?.textColor = .red
-        }
         let results = Game.shared.results.sorted(by: {$0.date > $1.date} )
         let result = results[indexPath.row]
         cell.textLabel?.text = "\(dateFormatter.string(from: result.date)) - \(result.result)"
         cell.textLabel?.textAlignment = .center
         return cell
-        
     }
     
-
 }

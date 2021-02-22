@@ -10,18 +10,28 @@ import UIKit
 
 class MainMenuController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
-    
-    @IBAction func resultButton(_ sender: UIButton) {
-    }
-    
+    @IBOutlet weak var resultsButton: UIButton!
     @IBOutlet weak var lastResultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
-        
+        startButton.addTarget(self, action: #selector(startSession), for: .touchUpInside)
+        resultsButton.addTarget(self, action: #selector(showResults), for: .touchUpInside)
     }
-    
+
+    @objc func startSession(_ sender: Any) {
+        Game.shared.gameSession = GameSession()
+        Game.shared.gameSession?.startGame(self)
+    }
+
+    @objc func showResults(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultsController = storyboard.instantiateViewController(withIdentifier: "ResultsController") as! ResultsController
+        resultsController.modalPresentationStyle = .overFullScreen
+        present(resultsController, animated: false)
+    }
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "StartGame":
@@ -35,7 +45,7 @@ class MainMenuController: UIViewController {
         default:
             break
         }
-    }
+    }*/
 }
 /*
 extension MainMenuController: GameDelegate {

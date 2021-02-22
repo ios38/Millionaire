@@ -21,15 +21,7 @@ class QuestionAndAnswers {
     init(from json: JSON) {
         question = json["question"].stringValue
         let answersJSON = json["answers"].arrayValue
-        //answers = answersJSON.map { String(from: $0.stringValue) }
-        answers = jsonToString(answersJSON)
-    }
-    
-    func jsonToString(_ ansversJSON: [JSON]) -> [String] {
-        var answers = [String]()
-        for i in 0..<ansversJSON.count {
-            answers.append(ansversJSON[i].stringValue)
-        }
-        return answers
+        answers = answersJSON.map { $0.stringValue }
+        //answers = jsonToString(answersJSON)
     }
 }
